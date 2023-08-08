@@ -34,7 +34,7 @@ data = load_data(rpath)
 
 
 
-# Load the model and encoder ans scaler
+# Load the model and encoder and scaler
 model = pickle.load(open("model.pkl", "rb"))
 encoder = pickle.load(open("encoder.pkl", "rb"))
 scaler = pickle.load(open("scaler.pkl", "rb"))
