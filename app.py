@@ -2,7 +2,42 @@ import streamlit as st
 import pandas as pd 
 import pickle 
 
-# 
+# Useful Functions
+def load_ml_components(fp):
+    "Load the ml components to re-use in app"
+    with open(fp, "rb") as f:
+        object = pickle.load(f)
+    return object
+
+# Variables and Constants
+#ml_core_fp = "model.pk" 
+
+# Execution
+#ml_components_dict = load_ml_components(fp=ml_core_fp)
+
+#labels = ml_components_dict['labels']
+#idx_to_labels = {i: l for (i,l) in enumerate(labels)}
+
+# Function to load the dataset
+@st.cache_resource
+def load_data(relative_path):
+   data= pd.read_csv(relative_path, index_col= 0)
+   #merged["date"] = pd.to_datetime(merged["date"])
+   return data
+
+    
+
+
+# Loading the base dataframe
+rpath = r"merged_train_data.csv"
+data = load_data(rpath)
+
+
+
+# Load the model and encoder ans scaler
+model = pickle.load(open("model.pkl", "rb"))
+encoder = pickle.load(open("encoder.pkl", "rb"))
+scaler = pickle.load(open("scaler.pkl", "rb"))
 
 # Interface 
 st.write("""
